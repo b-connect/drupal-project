@@ -24,6 +24,30 @@
         "reference": "1.6.0"
       }
     }
+  },{
+    "type": "package",
+    "package": {
+      "name": "drupal/devel_mode",
+      "version": "dev-master",
+      "type": "drupal-module",
+      "dist": {
+        "type": "zip",
+        "url": "https://github.com/b-connect/devel_mode/archive/master.zip",
+        "reference": "master"
+      }
+    }
+  },{
+    "type": "package",
+    "package": {
+      "name": "enyo/dropzone",
+      "version": "v4.3.0",
+      "type": "drupal-library",
+      "dist": {
+        "type": "zip",
+        "url": "https://github.com/enyo/dropzone/archive/v4.3.0.zip",
+        "reference": "v4.3.0"
+      }
+    }
   }],
   "require": {
       "composer/installers": "^1.2",
@@ -38,6 +62,10 @@
       "drupal/layout_plugin": "~1.0",
       "drupal/ds": "~2.0",
       "drupal/lightning": "~2.0",
+      "drupal/entity_reference_revisions": "~1.0",
+      "drupal/pathauto": "~1.0",
+      "drupal/token": "~1.0",
+      "drupal/view_unpublished": "~1.0",
       "drupal/paragraphs": "~1.0",
       "drupal/media_entity": "~1.0",
       "drupal/media_entity_image": "~1.0",
@@ -51,28 +79,65 @@
       "drupal/monolog": "~1.0",
       "drupal/blazy": "~1.0",
       "drupal/zurb_foundation": "~6.0",
+      "drupal/admin_toolbar": "~1.0",
+      "drupal/dropzonejs": "1.0-alpha3",
+      "enyo/dropzone": "~4.0",
       "drupal/slick": "~1.0"
   },
   "require-dev": {
+    "codeception/codeception": "~2.0",
     "behat/mink": "~1.7",
     "behat/mink-goutte-driver": "~1.2",
+    "drupal/devel": "~1.0",
+    "drupal/devel_mode": "master",
+    "squizlabs/php_codesniffer": "~3.0",
     "jcalderonzumba/gastonjs": "~1.0.2",
     "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
     "mikey179/vfsStream": "~1.2",
     "phpunit/phpunit": "~4.8",
     "symfony/css-selector": "~2.8"
   },
+  "config": {
+    "bin-dir": "bin/"
+  },
   "conflict": {
     "drupal/drupal": "*"
   },
   "extra": {
+    "installer-paths": {
+      "src/core": ["type:drupal-core"],
+      "src/libraries/{$name}": ["type:drupal-library"],
+      "src/modules/contrib/{$name}": ["type:drupal-module"],
+      "src/profiles/contrib/{$name}": ["type:drupal-profile"],
+      "src/themes/contrib/{$name}": ["type:drupal-theme"],
+      "drush/contrib/{$name}": ["type:drupal-drush"]
+    },
     "merge-plugin": {
       "include": [
-        "core/composer.json"
+        "src/core/composer.json"
       ],
       "recurse": false,
       "replace": false,
       "merge-extra": false
+    },
+    "patches": {
+      "drupal/paragraphs": {
+        "IEF Simple Widget not working in paragraphs with preview mode": "https://www.drupal.org/files/issues/ief_simple_widget_not-2722097-36.patch",
+        "Saving problem in preview mode with IEF items": "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
+      },
+      "drupal/dropzonejs": {
+        "DropzneJS is cleared on every Ajax response": "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-11_0.patch",
+        "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/improved_multistep-2823670-14.patch"
+      },
+      "drupal/entity_browser": {
+        "Improved MultiStep selection display": "https://www.drupal.org/files/issues/2822009_20.patch"
+      },
+      "drupal/linkit": {
+        "Missing ckeditor plugin schema": "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
+      },
+      "drupal/media_entity": {
+        "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
+      }
     }
   },
 
@@ -97,15 +162,5 @@
     "post-update-cmd": [
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
     ]
-  },
-  "extra": {
-    "installer-paths": {
-      "src/core": ["type:drupal-core"],
-      "src/libraries/{$name}": ["type:drupal-library"],
-      "src/modules/contrib/{$name}": ["type:drupal-module"],
-      "src/profiles/contrib/{$name}": ["type:drupal-profile"],
-      "src/themes/contrib/{$name}": ["type:drupal-theme"],
-      "drush/contrib/{$name}": ["type:drupal-drush"]
-    }
   }
 }
