@@ -64,7 +64,7 @@ class ScriptHandler {
    */
   public static function setupVm(Event $event) {
     $composer = $event->getComposer();
-    $name = explode('/', $composer->getPackage()->getName())[1];
+    $name = array_pop(explode('/', getcwd()));
     $event->getIO()->write("Write config for drupal-vm");
     $settings = [
       'build_composer_project' => FALSE,
