@@ -18,6 +18,16 @@ class ScriptHandler {
     return $project_root . '/src';
   }
 
+  // public static function createVM(Event $event) {
+  //   $fs = new Filesystem();
+  //   $root = static::getDrupalRoot(getcwd());
+  //   $vmDir = './vendor/geerlingguy/drupal-vm';
+  //
+  //   if ($fs->exists($vmDir)) {
+  //     $fs->symlink($vmDir . '/Vagrantfile', './Vagrantfile');
+  //   }
+  // }
+
   /**
    * Create required files.
    */

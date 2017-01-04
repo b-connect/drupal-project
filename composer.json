@@ -82,15 +82,16 @@
       "drupal/admin_toolbar": "~1.0",
       "drupal/dropzonejs": "1.0-alpha3",
       "enyo/dropzone": "~4.0",
-      "drupal/slick": "~1.0"
+      "drupal/slick": "~1.0",
+    "drupal/devel": "1.x-dev"
   },
   "require-dev": {
     "codeception/codeception": "~2.0",
     "behat/mink": "~1.7",
     "behat/mink-goutte-driver": "~1.2",
-    "drupal/devel": "~1.0",
     "drupal/devel_mode": "master",
     "squizlabs/php_codesniffer": "~3.0",
+    "geerlingguy/drupal-vm": "^4.1",
     "jcalderonzumba/gastonjs": "~1.0.2",
     "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
     "mikey179/vfsStream": "~1.2",
