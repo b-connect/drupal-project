@@ -157,8 +157,10 @@
     "pre-update-cmd": [
       "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
     ],
-    "post-install-cmd": [
+    "post-root-package-install": [
       "DrupalProject\\composer\\ScriptHandler::setupVm",
+    ],
+    "post-install-cmd": [
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
     ],
     "post-update-cmd": [
