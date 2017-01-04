@@ -5,6 +5,7 @@ namespace DrupalProject\composer;
 use Composer\Script\Event;
 use Composer\Semver\Comparator;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Script Handler Class.
@@ -63,7 +64,7 @@ class ScriptHandler {
    */
   public static function setupVm(Event $event) {
     $composer = $event->getComposer();
-    $name = explode('/', $composer->getPackage()->getName())[0];
+    $name = explode('/', $composer->getPackage()->getName())[1];
     $event->getIO()->write("Write config for drupal-vm");
     $settings = [
       'build_composer_project' => FALSE,
@@ -83,7 +84,8 @@ class ScriptHandler {
         'pimpmylog',
       ],
     ];
-    yaml_emit_file(getcwd() . '/config/config.yml', $settings);
+    $yaml = Yaml::dump($settings);
+    file_put_contents(getcwd() . '/config/config.yml', $yaml);
   }
 
   /**
