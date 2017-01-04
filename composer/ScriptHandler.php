@@ -18,16 +18,6 @@ class ScriptHandler {
     return $project_root . '/src';
   }
 
-  // public static function createVM(Event $event) {
-  //   $fs = new Filesystem();
-  //   $root = static::getDrupalRoot(getcwd());
-  //   $vmDir = './vendor/geerlingguy/drupal-vm';
-  //
-  //   if ($fs->exists($vmDir)) {
-  //     $fs->symlink($vmDir . '/Vagrantfile', './Vagrantfile');
-  //   }
-  // }
-
   /**
    * Create required files.
    */
@@ -69,6 +59,34 @@ class ScriptHandler {
   }
 
   /**
+   * Create required files.
+   */
+  public static function setupVm(Event $event) {
+    $composer = $event->getComposer();
+    $name = explode('/', $composer->getPackage()->getName())[0];
+    $event->getIO()->write("Write config for drupal-vm");
+    $settings = [
+      'build_composer_project' => FALSE,
+      'build_composer' => TRUE,
+      'drupal_composer_path' => FALSE,
+      'drupal_composer_install_dir' => '/var/www/drupalvm',
+      'drupal_core_path' => '{{ drupal_composer_install_dir }}/src',
+      'vagrant_hostname' => $name . '.dev',
+      'vagrant_ip' => '0.0.0.0',
+      'installed_extras' => [
+        'adminer',
+        'blackfire',
+        'nodejs',
+        'drush',
+        'drupalconsole',
+        'redis',
+        'pimpmylog',
+      ],
+    ];
+    yaml_emit_file(getcwd() . '/config/config.yml', $settings);
+  }
+
+  /**
    * Checks if the installed version of Composer is compatible.
    *
    * Composer 1.0.0 and higher consider a `composer install` without having a
@@ -85,7 +103,6 @@ class ScriptHandler {
   public static function checkComposerVersion(Event $event) {
     $composer = $event->getComposer();
     $io = $event->getIO();
-
     $version = $composer::VERSION;
 
     // The dev-channel of composer uses the git revision as version number,
