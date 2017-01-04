@@ -159,10 +159,11 @@
     ],
     "post-create-project-cmd": [
       "DrupalProject\\composer\\ScriptHandler::setupVm",
-      "vagrant plugin install vagrant-hostsupdate",
+      "vagrant plugin install vagrant-hostsupdater",
       "vagrant plugin install vagrant-auto_network"
     ],
     "post-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::setupVm",
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
     ],
     "post-update-cmd": [
