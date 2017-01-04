@@ -74,8 +74,9 @@ class ScriptHandler {
     $event->getIO()->write("Write config for drupal-vm");
     $settings = [
       'build_composer_project' => FALSE,
-      'build_composer' => TRUE,
+      'build_composer' => FALSE,
       'drupal_composer_path' => FALSE,
+      'drupal_install_profile' => 'lightning',
       'drupal_composer_install_dir' => '/var/www/drupalvm',
       'drupal_core_path' => '{{ drupal_composer_install_dir }}/src',
       'vagrant_hostname' => $name . '.dev',

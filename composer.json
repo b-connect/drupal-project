@@ -81,7 +81,8 @@
       "drupal/dropzonejs": "1.0-alpha3",
       "enyo/dropzone": "~4.0",
       "drupal/slick": "~1.0",
-    "drupal/devel": "1.x-dev"
+    "drupal/devel": "1.x-dev",
+    "derhasi/composer-preserve-paths": "^0.1.3"
   },
   "require-dev": {
     "codeception/codeception": "~2.0",
@@ -103,6 +104,10 @@
     "drupal/drupal": "*"
   },
   "extra": {
+    "preserve-paths": [
+      "src/modules/custom",
+      "src/themes/custom"
+    ],
     "installer-paths": {
       "src/core": ["type:drupal-core"],
       "src/libraries/{$name}": ["type:drupal-library"],
