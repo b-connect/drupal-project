@@ -160,21 +160,17 @@
     "pre-update-cmd": [
       "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
     ],
-    "post-create-project-cmd": [
-      "DrupalProject\\composer\\ScriptHandler::setupVm",
-      "vagrant plugin install vagrant-hostsupdater",
-      "vagrant plugin install vagrant-auto_network"
-    ],
     "post-install-cmd": [
-      "DrupalProject\\composer\\ScriptHandler::setupVm",
-      "vagrant plugin install vagrant-hostsupdater",
-      "vagrant plugin install vagrant-auto_network",
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
     ],
     "post-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ],
+    "setup": [
+      "DrupalProject\\composer\\ScriptHandler::setupVm",
       "vagrant plugin install vagrant-hostsupdater",
       "vagrant plugin install vagrant-auto_network",
-      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+      "vagrant up"
     ]
   }
 }
