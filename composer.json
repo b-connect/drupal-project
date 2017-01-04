@@ -54,14 +54,13 @@
       "drupal-composer/drupal-scaffold": "^2.2",
       "cweagans/composer-patches": "~1.0",
       "wikimedia/composer-merge-plugin": "^1.3.0",
-      "drupal/core": "~8.0",
+      "acquia/lightning-project": "~8.0",
       "drush/drush": "~8.0",
       "drupal/console": "~1.0",
       "kenwheeler/slick": "~1.6.0",
       "monolog/monolog": "~1.0",
       "drupal/layout_plugin": "~1.0",
       "drupal/ds": "~2.0",
-      "drupal/lightning": "~2.0",
       "drupal/entity_reference_revisions": "~1.0",
       "drupal/pathauto": "~1.0",
       "drupal/token": "~1.0",
@@ -73,7 +72,6 @@
       "drupal/media_entity_video": "~1.0",
       "drupal/media_entity_document": "~1.0",
       "drupal/page_manager": "~1.0",
-      "drupal/panels": "~3.0",
       "drupal/entity_browser": "~1.0",
       "drupal/inline_entity_form": "~1.0",
       "drupal/monolog": "~1.0",
@@ -158,15 +156,20 @@
       "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
     ],
     "post-create-project-cmd": [
-      "DrupalProject\\composer\\ScriptHandler::setupVm",
+      "DrupalProject\\composer\\ScriptHandler::setupVmCreateProject",
       "vagrant plugin install vagrant-hostsupdater",
       "vagrant plugin install vagrant-auto_network"
     ],
     "post-install-cmd": [
-      "DrupalProject\\composer\\ScriptHandler::setupVm",
+      "DrupalProject\\composer\\ScriptHandler::setupVmInstall",
+      "vagrant plugin install vagrant-hostsupdater",
+      "vagrant plugin install vagrant-auto_network",
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
     ],
     "post-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::setupVmInstall",
+      "vagrant plugin install vagrant-hostsupdater",
+      "vagrant plugin install vagrant-auto_network",
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
     ]
   }

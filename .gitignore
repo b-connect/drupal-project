@@ -4,4 +4,4 @@ composer.lock
 bin
 .vagrant
 config/local.config.yml
-
+config/config.yml
