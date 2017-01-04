@@ -166,7 +166,6 @@
       "vagrant plugin install vagrant-auto_network"
     ],
     "post-install-cmd": [
-      "DrupalProject\\composer\\ScriptHandler::setupVm",
       "vagrant plugin install vagrant-hostsupdater",
       "vagrant plugin install vagrant-auto_network",
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"

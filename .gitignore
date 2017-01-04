@@ -4,3 +4,6 @@ bin
 .vagrant
 config/local.config.yml
 config/config.yml
+/src/*
+!/src/modules/custom
+!/src/themes/custom

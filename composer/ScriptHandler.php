@@ -77,6 +77,7 @@ class ScriptHandler {
       'build_composer' => FALSE,
       'drupal_composer_path' => FALSE,
       'drupal_install_profile' => 'lightning',
+      'configure_drush_aliases' => TRUE,
       'drupal_composer_install_dir' => '/var/www/drupalvm',
       'drupal_core_path' => '{{ drupal_composer_install_dir }}/src',
       'vagrant_hostname' => $name . '.dev',
