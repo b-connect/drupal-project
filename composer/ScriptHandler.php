@@ -74,7 +74,7 @@ class ScriptHandler {
     $event->getIO()->write("Write config for drupal-vm");
     $settings = [
       'build_composer_project' => FALSE,
-      'build_composer' => FALSE,
+      'build_composer' => TRUE,
       'drupal_composer_path' => FALSE,
       'drupal_install_profile' => 'lightning',
       'configure_drush_aliases' => TRUE,
@@ -87,6 +87,7 @@ class ScriptHandler {
       'php_version' => "7.0",
       'php_max_input_vars' => '4000',
       'vagrant_ip' => '0.0.0.0',
+      'install_site' => FALSE,
       'installed_extras' => [
         'adminer',
         'blackfire',
