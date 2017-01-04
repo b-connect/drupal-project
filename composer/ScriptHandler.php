@@ -60,31 +60,16 @@ class ScriptHandler {
   }
 
   /**
-   * Create required files on install project.
-   */
-  public static function setupVmCreateProject(Event $event) {
-    $name = $event->getIo()->ask('Enter your dev domain (<name>.dev)');
-    ScriptHandler::setupVm($event, $name);
-  }
-
-  /**
-   * Create required files on install project.
-   */
-  public static function setupVmInstall(Event $event) {
-    $name = $event->getIo()->ask('Enter your dev domain (<name>.dev)');
-    ScriptHandler::setupVm($event, $name);
-  }
-
-  /**
    * Create required files.
    */
-  public static function setupVm(Event $event, $name) {
+  public static function setupVm(Event $event) {
 
     $fs = new Filesystem();
     if ($fs->exists(getcwd() . '/config/config.yml')) {
       $event->getIO()->write("Config file exists");
       return;
     }
+    $name = $event->getIo()->ask('Enter your dev domain (<name>.dev)');
     $composer = $event->getComposer();
     $event->getIO()->write("Write config for drupal-vm");
     $settings = [
