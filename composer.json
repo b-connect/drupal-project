@@ -177,7 +177,7 @@
       "vagrant up"
     ],
     "vm:provision": [
-      "vagrant provision"
+      "vagrant up --provision"
     ]
   }
 }

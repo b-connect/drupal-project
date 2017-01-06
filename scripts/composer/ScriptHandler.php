@@ -65,14 +65,38 @@ class ScriptHandler {
   public static function setupVm(Event $event) {
 
     $fs = new Filesystem();
-    if ($fs->exists(getcwd() . '/config/config.yml')) {
-      $event->getIO()->write("Config file exists. This will override your actual settings.");
-    }
+
+    $settings = [
+      'build_composer_project' => FALSE,
+      'build_composer' => TRUE,
+      'drupal_composer_path' => FALSE,
+      'drupal_install_profile' => 'lightning',
+      'configure_drush_aliases' => TRUE,
+      'configure_local_drush_aliases' => TRUE,
+      'nodejs_version' => '6.x',
+      'pre_provision_scripts' => [
+        '/scripts/provisioning/pre/*',
+      ],
+      'post_provision_scripts' => [
+        '/scripts/provisioning/post/*',
+      ],
+      'nodejs_npm_global_packages' => [
+        ['name' => 'gulp'],
+        ['name' => 'bower'],
+        ['name' => 'forever'],
+      ],
+      'drupal_composer_install_dir' => '/var/www/drupalvm',
+      'drupal_core_path' => '{{ drupal_composer_install_dir }}/src',
+      'php_version' => "7.1",
+      'php_max_input_vars' => '4000',
+      'vagrant_ip' => '0.0.0.0',
+      'install_site' => FALSE,
+    ];
 
     $defaultName = explode('/', getcwd());
     $defaultName = array_pop($defaultName);
 
-    $name = $event->getIo()->ask('Enter your dev domain (<name>.dev) [' . $defaultName . ']:', $defaultName);
+    $settings['vagrant_hostname'] = $event->getIo()->ask('Enter your dev domain (<name>.dev) [' . $defaultName . ']:', $defaultName) . '.dev';
 
     $extras = [
       'solr' => FALSE,
@@ -82,36 +106,24 @@ class ScriptHandler {
       'redis' => TRUE,
       'pimpmylog' => TRUE,
       'adminer' => TRUE,
+      'xdebug' => FALSE,
+      'xhprof' => FALSE,
     ];
 
     $extras['solr'] = $event->getIo()->askConfirmation('Install solr [N,y]:', NULL);
-    $extras['nodejs'] = $event->getIo()->askConfirmation('Install nodey [Y,n]:', TRUE);
+    $extras['nodejs'] = $event->getIo()->askConfirmation('Install nodejs [Y,n]:', TRUE);
     $extras['blackfire'] = $event->getIo()->askConfirmation('Install blackfire [N,y]:', NULL);
     $extras['redis'] = $event->getIo()->askConfirmation('Install redis [N,y]:', NULL);
+    $extras['xhprof'] = $event->getIo()->askConfirmation('Install xhprof [N,y]:', NULL);
+    $extras['xdebug'] = $event->getIo()->askConfirmation('Install xdebug [N,y]:', NULL);
 
     $extras = array_filter($extras);
-    $extras = array_values($extras);
+    $extras = array_keys($extras);
+    $settings['installed_extras'] = $extras;
 
     $composer = $event->getComposer();
     $event->getIO()->write("Write config for drupal-vm");
-    $settings = [
-      'build_composer_project' => FALSE,
-      'build_composer' => TRUE,
-      'drupal_composer_path' => FALSE,
-      'drupal_install_profile' => 'lightning',
-      'configure_drush_aliases' => TRUE,
-      'configure_local_drush_aliases' => TRUE,
-      'nodejs_version' => '6.x',
-      'nodejs_npm_global_packages' => ['gulp', 'bower'],
-      'drupal_composer_install_dir' => '/var/www/drupalvm',
-      'drupal_core_path' => '{{ drupal_composer_install_dir }}/src',
-      'vagrant_hostname' => $name . '.dev',
-      'php_version' => "7.1",
-      'php_max_input_vars' => '4000',
-      'vagrant_ip' => '0.0.0.0',
-      'install_site' => FALSE,
-      'installed_extras' => $extras,
-    ];
+
     $yaml = Yaml::dump($settings);
     file_put_contents(getcwd() . '/config/config.yml', $yaml);
   }
