@@ -66,10 +66,32 @@ class ScriptHandler {
 
     $fs = new Filesystem();
     if ($fs->exists(getcwd() . '/config/config.yml')) {
-      $event->getIO()->write("Config file exists");
-      return;
+      $event->getIO()->write("Config file exists. This will override your actual settings.");
     }
-    $name = $event->getIo()->ask('Enter your dev domain (<name>.dev)');
+
+    $defaultName = explode('/', getcwd());
+    $defaultName = array_pop($defaultName);
+
+    $name = $event->getIo()->ask('Enter your dev domain (<name>.dev) [' . $defaultName . ']:', $defaultName);
+
+    $extras = [
+      'solr' => FALSE,
+      'nodejs' => TRUE,
+      'drush' => TRUE,
+      'blackfire' => TRUE,
+      'redis' => TRUE,
+      'pimpmylog' => TRUE,
+      'adminer' => TRUE,
+    ];
+
+    $extras['solr'] = $event->getIo()->askConfirmation('Install solr [N,y]:', NULL);
+    $extras['nodejs'] = $event->getIo()->askConfirmation('Install nodey [Y,n]:', TRUE);
+    $extras['blackfire'] = $event->getIo()->askConfirmation('Install blackfire [N,y]:', NULL);
+    $extras['redis'] = $event->getIo()->askConfirmation('Install redis [N,y]:', NULL);
+
+    $extras = array_filter($extras);
+    $extras = array_values($extras);
+
     $composer = $event->getComposer();
     $event->getIO()->write("Write config for drupal-vm");
     $settings = [
@@ -84,19 +106,11 @@ class ScriptHandler {
       'drupal_composer_install_dir' => '/var/www/drupalvm',
       'drupal_core_path' => '{{ drupal_composer_install_dir }}/src',
       'vagrant_hostname' => $name . '.dev',
-      'php_version' => "7.0",
+      'php_version' => "7.1",
       'php_max_input_vars' => '4000',
       'vagrant_ip' => '0.0.0.0',
       'install_site' => FALSE,
-      'installed_extras' => [
-        'adminer',
-        'blackfire',
-        'nodejs',
-        'drush',
-        'drupalconsole',
-        'redis',
-        'pimpmylog',
-      ],
+      'installed_extras' => $extras,
     ];
     $yaml = Yaml::dump($settings);
     file_put_contents(getcwd() . '/config/config.yml', $yaml);

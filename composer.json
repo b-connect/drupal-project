@@ -95,10 +95,12 @@
     "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
     "mikey179/vfsStream": "~1.2",
     "phpunit/phpunit": "~4.8",
-    "symfony/css-selector": "~2.8"
+    "symfony/css-selector": "~2.8",
+    "drupal/drupal-extension": "^3.2"
   },
   "config": {
-    "bin-dir": "bin/"
+    "bin-dir": "bin/",
+    "process-timeout": 4000
   },
   "conflict": {
     "drupal/drupal": "*"
@@ -166,11 +168,16 @@
     "post-update-cmd": [
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
     ],
-    "setup": [
+    "vm:setup": [
       "DrupalProject\\composer\\ScriptHandler::setupVm",
       "vagrant plugin install vagrant-hostsupdater",
-      "vagrant plugin install vagrant-auto_network",
+      "vagrant plugin install vagrant-auto_network"
+    ],
+    "vm:start": [
       "vagrant up"
+    ],
+    "vm:provision": [
+      "vagrant provision"
     ]
   }
 }
