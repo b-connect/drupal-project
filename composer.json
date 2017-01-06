@@ -151,7 +151,7 @@
   "prefer-stable": true,
   "autoload": {
     "classmap": [
-      "composer/ScriptHandler.php"
+      "scripts/composer/ScriptHandler.php"
     ]
   },
   "scripts": {
