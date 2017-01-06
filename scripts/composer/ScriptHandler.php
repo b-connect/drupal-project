@@ -74,12 +74,12 @@ class ScriptHandler {
       'configure_drush_aliases' => TRUE,
       'configure_local_drush_aliases' => TRUE,
       'nodejs_version' => '6.x',
-      'pre_provision_scripts' => [
-        '/scripts/provisioning/pre/*',
-      ],
-      'post_provision_scripts' => [
-        '/scripts/provisioning/post/*',
-      ],
+      // 'pre_provision_scripts' => [
+      //   '/scripts/provisioning/pre/*',
+      // ],
+      // 'post_provision_scripts' => [
+      //   '/scripts/provisioning/post/*',
+      // ],
       'nodejs_npm_global_packages' => [
         ['name' => 'gulp'],
         ['name' => 'bower'],
@@ -126,6 +126,21 @@ class ScriptHandler {
 
     $yaml = Yaml::dump($settings);
     file_put_contents(getcwd() . '/config/config.yml', $yaml);
+  }
+
+  /**
+   * How help.
+   */
+  public static function displayHelp(Event $event) {
+    $event->getIO()->write([
+      '*** How to use this project ***',
+      '** Setup vm configuration **',
+      'composer vm:setup',
+      '** Start vm **',
+      'composer vm:start',
+      '** Provisioning vm **',
+      'composer vm:provision',
+    ]);
   }
 
   /**
