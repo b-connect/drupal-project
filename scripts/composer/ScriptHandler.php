@@ -66,37 +66,14 @@ class ScriptHandler {
 
     $fs = new Filesystem();
 
-    $settings = [
-      'build_composer_project' => FALSE,
-      'build_composer' => TRUE,
-      'drupal_composer_path' => FALSE,
-      'drupal_install_profile' => 'lightning',
-      'configure_drush_aliases' => TRUE,
-      'configure_local_drush_aliases' => TRUE,
-      'nodejs_version' => '6.x',
-      // 'pre_provision_scripts' => [
-      //   '/scripts/provisioning/pre/*',
-      // ],
-      // 'post_provision_scripts' => [
-      //   '/scripts/provisioning/post/*',
-      // ],
-      'nodejs_npm_global_packages' => [
-        ['name' => 'gulp'],
-        ['name' => 'bower'],
-        ['name' => 'forever'],
-      ],
-      'drupal_composer_install_dir' => '/var/www/drupalvm',
-      'drupal_core_path' => '{{ drupal_composer_install_dir }}/src',
-      'php_version' => "7.1",
-      'php_max_input_vars' => '4000',
-      'vagrant_ip' => '0.0.0.0',
-      'install_site' => FALSE,
-    ];
+    $settings = Yaml::parse(file_get_contents(getcwd() . '/config/default.config.yml'));
 
     $defaultName = explode('/', getcwd());
     $defaultName = array_pop($defaultName);
 
-    $settings['vagrant_hostname'] = $event->getIo()->ask('Enter your dev domain (<name>.dev) [' . $defaultName . ']:', $defaultName) . '.dev';
+    $settings['vagrant_machine_name'] = $event->getIo()->ask('Enter your dev domain (<name>.dev) [' . $defaultName . ']:', $defaultName);
+    $settings['vagrant_hostname'] = $settings['vagrant_machine_name'] . '.dev';
+
 
     $extras = [
       'solr' => FALSE,
@@ -108,6 +85,7 @@ class ScriptHandler {
       'adminer' => TRUE,
       'xdebug' => FALSE,
       'xhprof' => FALSE,
+      'mailhog' => TRUE,
     ];
 
     $extras['solr'] = $event->getIo()->askConfirmation('Install solr [N,y]:', NULL);
@@ -116,6 +94,7 @@ class ScriptHandler {
     $extras['redis'] = $event->getIo()->askConfirmation('Install redis [N,y]:', NULL);
     $extras['xhprof'] = $event->getIo()->askConfirmation('Install xhprof [N,y]:', NULL);
     $extras['xdebug'] = $event->getIo()->askConfirmation('Install xdebug [N,y]:', NULL);
+    $extras['mailhog'] = $event->getIo()->askConfirmation('Install xdebug [Y,n]:', NULL);
 
     $extras = array_filter($extras);
     $extras = array_keys($extras);
