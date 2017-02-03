@@ -57,6 +57,13 @@ drupalvm_webserver: nginx
 drupal_composer_install_dir: /var/www/drupalvm
 drupal_core_path: '{{ drupal_composer_install_dir }}/src'
 
+nginx_client_max_body_size: "128m"
+nginx_server_names_hash_bucket_size: "255"
+
+
+mysql_innodb_flush_log_at_trx_commit: "2"
+mysql_max_allowed_packet: "1024M"
+
 vagrant_ip: 0.0.0.0
 install_site: true
 
