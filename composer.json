@@ -65,7 +65,7 @@
       "drupal/pathauto": "~1.0",
       "drupal/token": "~1.0",
       "drupal/view_unpublished": "~1.0",
-      "drupal/paragraphs": "~1.0",
+      "drupal/paragraphs": "1.x-dev",
       "drupal/media_entity": "~1.0",
       "drupal/media_entity_image": "~1.0",
       "drupal/video_embed_field": "~1.0",
@@ -80,9 +80,7 @@
       "drupal/admin_toolbar": "~1.0",
       "drupal/dropzonejs": "1.0-alpha3",
       "enyo/dropzone": "~4.0",
-      "drupal/slick": "~1.0",
-    "drupal/devel": "1.x-dev",
-    "derhasi/composer-preserve-paths": "^0.1.3"
+      "drupal/slick": "~1.0"
   },
   "require-dev": {
     "codeception/codeception": "~2.0",
@@ -96,7 +94,8 @@
     "mikey179/vfsStream": "~1.2",
     "phpunit/phpunit": "~4.8",
     "symfony/css-selector": "~2.8",
-    "drupal/drupal-extension": "^3.2"
+    "drupal/drupal-extension": "^3.2",
+    "drupal/devel": "1.x-dev"
   },
   "config": {
     "bin-dir": "bin/",
@@ -127,19 +126,9 @@
       "merge-extra": false
     },
     "patches": {
-      "drupal/paragraphs": {
-        "IEF Simple Widget not working in paragraphs with preview mode": "https://www.drupal.org/files/issues/ief_simple_widget_not-2722097-36.patch",
-        "Saving problem in preview mode with IEF items": "https://www.drupal.org/files/issues/saving_problem_in-2804377-2.patch"
-      },
       "drupal/dropzonejs": {
         "DropzneJS is cleared on every Ajax response": "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-11_0.patch",
         "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/improved_multistep-2823670-14.patch"
-      },
-      "drupal/entity_browser": {
-        "Improved MultiStep selection display": "https://www.drupal.org/files/issues/2822009_20.patch"
-      },
-      "drupal/linkit": {
-        "Missing ckeditor plugin schema": "https://www.drupal.org/files/issues/missing_ckeditor_plugin-2812889-2.patch"
       },
       "drupal/media_entity": {
         "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
