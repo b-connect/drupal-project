@@ -52,7 +52,7 @@ php_packages:
   - php7.1-mysql
   - php7.1-pdo
 
-drupal_install_profile: payu_web
+drupal_install_profile: lightning
 drupalvm_webserver: nginx
 drupal_composer_install_dir: /var/www/drupalvm
 drupal_core_path: '{{ drupal_composer_install_dir }}/src'
