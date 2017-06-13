@@ -12,94 +12,48 @@
   "repositories": [{
     "type": "composer",
     "url": "https://packages.drupal.org/8"
-  }, {
-    "type": "package",
-    "package": {
-      "name": "kenwheeler/slick",
-      "version": "1.6.0",
-      "type": "drupal-library",
-      "dist": {
-        "type": "zip",
-        "url": "https://github.com/kenwheeler/slick/archive/1.6.0.zip",
-        "reference": "1.6.0"
-      }
-    }
-  },{
-    "type": "package",
-    "package": {
-      "name": "drupal/devel_mode",
-      "version": "dev-master",
-      "type": "drupal-module",
-      "dist": {
-        "type": "zip",
-        "url": "https://github.com/b-connect/devel_mode/archive/master.zip",
-        "reference": "master"
-      }
-    }
-  },{
-    "type": "package",
-    "package": {
-      "name": "enyo/dropzone",
-      "version": "v4.3.0",
-      "type": "drupal-library",
-      "dist": {
-        "type": "zip",
-        "url": "https://github.com/enyo/dropzone/archive/v4.3.0.zip",
-        "reference": "v4.3.0"
-      }
-    }
   }],
   "require": {
       "composer/installers": "^1.2",
       "drupal-composer/drupal-scaffold": "^2.2",
       "cweagans/composer-patches": "~1.0",
       "wikimedia/composer-merge-plugin": "^1.3.0",
-      "acquia/lightning-project": "~8.0",
+      "drupal/core": "~8.3",
       "drush/drush": "~8.0",
       "drupal/console": "~1.0",
-      "kenwheeler/slick": "~1.6.0",
       "monolog/monolog": "~1.0",
       "drupal/layout_plugin": "~1.0",
-      "drupal/ds": "~2.0",
+      "drupal/ds": "~3.0",
       "drupal/entity_reference_revisions": "~1.0",
       "drupal/pathauto": "~1.0",
       "drupal/token": "~1.0",
       "drupal/view_unpublished": "~1.0",
-      "drupal/paragraphs": "1.x-dev",
+      "drupal/paragraphs": "~1.0",
       "drupal/media_entity": "~1.0",
       "drupal/media_entity_image": "~1.0",
-      "drupal/video_embed_field": "~1.0",
       "drupal/media_entity_video": "~1.0",
       "drupal/media_entity_document": "~1.0",
-      "drupal/page_manager": "~1.0",
+      "drupal/video_embed_field": "~1.0",
+      "drupal/taxonomy_access_fix" : "~2.0",
+      "drupal/search_api": "~1.0",
+      "drupal/page_manager": "~4.0",
+      "drupal/panels": "~4.0",
       "drupal/entity_browser": "~1.0",
       "drupal/inline_entity_form": "~1.0",
       "drupal/monolog": "~1.0",
-      "drupal/blazy": "~1.0",
       "drupal/zurb_foundation": "~6.0",
       "drupal/admin_toolbar": "~1.0",
-      "drupal/dropzonejs": "1.0-alpha3",
-      "enyo/dropzone": "~4.0",
-      "drupal/slick": "~1.0"
+      "drupal/twig_extender": "~2.0"
   },
   "require-dev": {
-    "codeception/codeception": "~2.0",
-    "behat/mink": "~1.7",
-    "behat/mink-goutte-driver": "~1.2",
-    "drupal/devel_mode": "master",
-    "squizlabs/php_codesniffer": "~3.0",
-    "geerlingguy/drupal-vm": "^4.1",
-    "jcalderonzumba/gastonjs": "~1.0.2",
-    "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
-    "mikey179/vfsStream": "~1.2",
-    "phpunit/phpunit": "~4.8",
-    "symfony/css-selector": "~2.8",
-    "drupal/drupal-extension": "^3.2",
-    "drupal/devel": "1.x-dev"
+    "geerlingguy/drupal-vm": "^4.5",
+    "drupal/devel": "~1.0",
+    "drupal/devel_mode": "~1.0"
   },
   "config": {
     "bin-dir": "bin/",
-    "process-timeout": 4000
+    "process-timeout": 4000,
+    "discard-changes": true
   },
   "conflict": {
     "drupal/drupal": "*"
