@@ -59,16 +59,12 @@
     "drupal/drupal": "*"
   },
   "extra": {
-    "preserve-paths": [
-      "src/modules/custom",
-      "src/themes/custom"
-    ],
     "installer-paths": {
-      "src/core": ["type:drupal-core"],
-      "src/libraries/{$name}": ["type:drupal-library"],
-      "src/modules/contrib/{$name}": ["type:drupal-module"],
-      "src/profiles/contrib/{$name}": ["type:drupal-profile"],
-      "src/themes/contrib/{$name}": ["type:drupal-theme"],
+      "docroot/core": ["type:drupal-core"],
+      "docroot/libraries/{$name}": ["type:drupal-library"],
+      "docroot/modules/contrib/{$name}": ["type:drupal-module"],
+      "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
+      "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
       "drush/contrib/{$name}": ["type:drupal-drush"]
     },
     "merge-plugin": {
@@ -78,15 +74,6 @@
       "recurse": false,
       "replace": false,
       "merge-extra": false
-    },
-    "patches": {
-      "drupal/dropzonejs": {
-        "DropzneJS is cleared on every Ajax response": "https://www.drupal.org/files/issues/dropznejs_is_cleared_on-2827120-11_0.patch",
-        "Improved MultiStep selection display (DropZone Widget)": "https://www.drupal.org/files/issues/improved_multistep-2823670-14.patch"
-      },
-      "drupal/media_entity": {
-        "Make the label form element non-required in the entity form": "https://www.drupal.org/files/issues/2813685-21.patch"
-      }
     }
   },
 
