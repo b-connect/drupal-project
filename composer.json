@@ -17,7 +17,6 @@
       "composer/installers": "^1.2",
       "drupal-composer/drupal-scaffold": "^2.2",
       "cweagans/composer-patches": "~1.0",
-      "wikimedia/composer-merge-plugin": "^1.3.0",
       "drupal/core": "~8.3",
       "drush/drush": "~8.0",
       "drupal/console": "~1.0",
@@ -53,7 +52,8 @@
   "config": {
     "bin-dir": "bin/",
     "process-timeout": 4000,
-    "discard-changes": true
+    "discard-changes": true,
+    "sort-packages": true
   },
   "conflict": {
     "drupal/drupal": "*"

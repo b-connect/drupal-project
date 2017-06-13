@@ -55,7 +55,7 @@ php_packages:
 drupal_install_profile: lightning
 drupalvm_webserver: nginx
 drupal_composer_install_dir: /var/www/drupalvm
-drupal_core_path: '{{ drupal_composer_install_dir }}/src'
+drupal_core_path: '{{ drupal_composer_install_dir }}/docroot'
 
 nginx_client_max_body_size: "128m"
 nginx_server_names_hash_bucket_size: "255"
