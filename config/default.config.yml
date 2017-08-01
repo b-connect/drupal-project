@@ -1,10 +1,16 @@
-build_composer_project: false
-build_composer: true
+# Drupal config
+drupal_build_composer_project: false
+drupal_build_composer: false
 drupal_composer_path: false
+drupal_account_name: admin
+drupal_account_pass: admin
+drupal_install_profile: standard
+drupalvm_webserver: nginx
+drupal_composer_install_dir: /var/www/drupalvm
+drupal_core_path: '{{ drupal_composer_install_dir }}/docroot'
+
 configure_drush_aliases: true
 configure_local_drush_aliases: true
-vagrant_memory: 4096
-vagrant_cpus: 2
 installed_extras:
     - nodejs
     - drush
@@ -12,63 +18,30 @@ installed_extras:
     - adminer
     - redis
     - mailhog
+    - drupalconsole
 
 # Node JS
-nodejs_version: 6.x
-nodejs_npm_global_packages:
-    - { name: gulp }
-    - { name: bower }
-    - { name: forever }
-    - { name: node-sass }
+nodejs_version: 8.x
 
 # PHP
-php_version: '7.1'
 php_max_input_vars: '4000'
-php_xdebug_default_enable: 0
-php_xdebug_coverage_enable: 0
-php_xdebug_cli_enable: 1
-php_xdebug_remote_enable: 1
-php_xdebug_remote_connect_back: 1
-php_xdebug_idekey: PHPSTORM
-php_xdebug_max_nesting_level: 512
-php_packages:
-  - php7.1-common
-  - php7.1-cli
-  - php7.1-dev
-  - php7.1-fpm
-  - libpcre3-dev
-  - php7.1-gd
-  - php7.1-curl
-  - php7.1-imap
-  - php7.1-json
-  - php7.1-curl
-  - php7.1-opcache
-  - php7.1-xml
-  - php7.1-mbstring
-  - php7.1-redis
-  - php7.1-apcu
-  - php7.1-xdebug
-  - php7.1-pgsql
-  - php7.1-mysql
-  - php7.1-pdo
+php_memory_limit: "512M"
+php_max_execution_time: "720"
+php_max_input_time: "720"
+php_upload_max_filesize: "200M"
+php_post_max_size: "200M"
+php_date_timezone: "Europe/Berlin"
 
-drupal_install_profile: lightning
-drupalvm_webserver: nginx
-drupal_composer_install_dir: /var/www/drupalvm
-drupal_core_path: '{{ drupal_composer_install_dir }}/docroot'
-
-nginx_client_max_body_size: "128m"
+# Setup NGINX
+nginx_client_max_body_size: "300m"
 nginx_server_names_hash_bucket_size: "255"
 
-
+# Tune MySQL
 mysql_innodb_flush_log_at_trx_commit: "2"
 mysql_max_allowed_packet: "1024M"
 
 vagrant_ip: 0.0.0.0
-install_site: true
+install_site: false
 
-drupal_account_name: admin
-drupal_account_pass: admin
-
-vagrant_hostname: local.dev
-vagrant_machine_name: local.dev
+vagrant_hostname: reference.dev
+vagrant_machine_name: reference.dev
